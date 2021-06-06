@@ -14,8 +14,8 @@ jobs:
       - run: echo "A first hello dc"
       - run: npm -v
       - run: 
-        name: Install
-        command: yarn Install
+          name: Install
+          command: yarn Install
       - run: 
-        name: Build
-        command: yarn build  
+          name: Build
+          command: yarn build  
