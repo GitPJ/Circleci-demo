@@ -4,7 +4,38 @@ jobs:
     docker:
       - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            -"b9:ff:19:6b:c8:4c:6c:21:ab:6c:a0:d6:d3:7a:df:13"
       - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - restore_cache:
+          key: dependencies_imooc
+
+      - run: 
+          name: Install
+          command: yarn install
+
+      - save_cache:
+          key: dependencies_imooc
+          paths:
+            - node_modules
+      - run: 
+          name: Build
+          command: yarn build   
+
+      # - save_cache:
+      #     key: v1-myapp-cache-new
+      #     paths:
+      #       - ~/d2
+
+      - run: 
+          name: Prepare shell commands
+          command: chmod +x scripts/deploy.sh
+      - run: 
+          name: Run Deploy to Github pages
+          command: ./scripts/deploy.sh    
       - run: npm -v
       - run: node -v
+      - run: echo "hello world" # run the `echo` command    
+
+      
