@@ -6,7 +6,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            -"b9:ff:19:6b:c8:4c:6c:21:ab:6c:a0:d6:d3:7a:df:13"
+            - "b9:ff:19:6b:c8:4c:6c:21:ab:6c:a0:d6:d3:7a:df:13"
       - checkout # check out the code in the project directory
       - restore_cache:
           key: dependencies_imooc
